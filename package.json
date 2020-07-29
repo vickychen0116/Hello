@@ -1,0 +1,39 @@
+{
+  "name": "Hello",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node ./dist/index.js",
+    "test": "ts-node ./src/index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/config": "0.0.36",
+    "@types/lodash": "^4.14.152",
+    "@types/mongodb": "^3.5.20",
+    "@types/mongoose": "^5.7.22",
+    "@types/node": "^14.0.1",
+    "@types/readline-sync": "^1.4.3",
+    "node-dev": "^4.0.0",
+    "ts-node": "^8.10.2",
+    "ts-node-dev": "^1.0.0-pre.44"
+  },
+  "dependencies": {
+    "@typegoose/typegoose": "^7.2.0",
+    "config": "^3.3.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "lodash": "^4.17.15",
+    "mongodb": "^3.5.8",
+    "mongodb-memory-server": "^6.6.1",
+    "mongoose": "^5.9.18",
+    "readline-sync": "^1.4.10",
+    "typescript": "^3.9.5",
+    "winston": "^3.2.1",
+    "winston-daily-rotate-file": "^4.4.2"
+  }
+}
