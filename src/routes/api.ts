@@ -5,10 +5,10 @@ var port    = process.env.PORT || 3000;
 var router = express.Router();
 
 // 在每一個請求被處理之前都會執行的 middleware
-router.use(function(req:string, res:any, next) {
+router.use(function(req:string, res:any, next:any) {
 
   // 輸出記錄訊息至終端機
-  console.log(req.method, req.url);
+  //console.log(req.method, req.url);
 
   // 繼續路由處理
   next();

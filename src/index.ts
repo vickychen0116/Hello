@@ -308,5 +308,5 @@ apeMember.invoice();
 var express = require('express');
 var app = express();
 var apis = require('./routes/api'); // 加在require部分
-app.use('/', apis); // 加在app.use部分
+app.use('./routes/', apis); // 加在app.use部分
 
