@@ -7,12 +7,14 @@ import { UserModel } from "./models/userModel";
 import async from "async";
 import { allowedNodeEnvironmentFlags } from "process";
 import fs from "fs";
-
+import { Error } from "./models/errorModel";
 /* Controllers (route handlers) */
 import * as userController from "./controllers/userControllers";
 
 /* Create Express server */
 const app = express();
+
+/* Connect to PostgreSQL */
 
 /* Express configuration */
 app.set("port", process.env.PORT || 3000);
@@ -20,8 +22,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/public', express.static('public'));
 //default用json
-app.use(function (req:any, res:any, next:any) {
+app.use(function (err: Error, req:Request, res:Response, next:NextFunction) {
   res.header('Content-Type', 'application/json');
+  res.status(err.status || 500);
+  res.render('error', {
+    message: err.message,
+    error: err
+  });
   next();
 });
 
@@ -30,7 +37,6 @@ app.post("/users", userController.adduser);
 app.get("/users", userController.getalluser);
 app.get("/users/:id", userController.getuser);
 app.delete("/users/:id", userController.deleteuser);
-
 
 app.get('/index.html', function (req:string, res:any) {
   res.header('Content-Type', 'application/html');
