@@ -13,18 +13,26 @@ export const ENVIRONMENT = process.env.NODE_ENV;
 const prod = ENVIRONMENT === "production"; // Anything else is treated as 'dev'
 
 export const SESSION_SECRET = process.env["SESSION_SECRET"];
-export const POSTGRESQL_URI = prod ? process.env["POSTGRESQL_URI"] : process.env["POSTGRESQL_URI"];
-
 if (!SESSION_SECRET) {
     logger.error("No client secret. Set SESSION_SECRET environment variable.");
     process.exit(1);
 }
-
+export const POSTGRESQL_URI = prod ? process.env["POSTGRESQL_URI"] : process.env["POSTGRESQL_URI"];
 if (!POSTGRESQL_URI) {
     if (prod) {
-        logger.error("No mongo connection string. Set POSTGRESQL_URI environment variable.");
+        logger.error("No POSTGRE connection string. Set POSTGRESQL_URI environment variable.");
     } else {
-        logger.error("No mongo connection string. Set POSTGRESQL_URI environment variable.");
+        logger.error("No POSTGRE connection string. Set POSTGRESQL_URI environment variable.");
+    }
+    process.exit(1);
+}
+
+export const MONGODB_URI = prod ? process.env["MONGODB_URI"] : process.env["MONGODB_URI"];
+if (!MONGODB_URI) {
+    if (prod) {
+        logger.error("No mongo connection string. Set MONGODB_URI environment variable.");
+    } else {
+        logger.error("No mongo connection string. Set MONGODB_URI environment variable.");
     }
     process.exit(1);
 }

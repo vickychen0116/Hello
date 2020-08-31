@@ -1,9 +1,5 @@
-import express from "express";
+
 import { Response, Request, NextFunction } from "express";
-import { UserModel } from "../models/userModel";
-import fs from "fs";
-import logger from '../util/winston';
-import { Error } from "../models/errorModel";
 import { Client } from 'pg';
 import { POSTGRESQL_URI } from "../util/secrets";
 

@@ -3,14 +3,13 @@ import { resolve } from "path";
 import express from "express";
 import bodyParser from "body-parser";
 import { Response, Request, NextFunction } from "express";
-import { UserModel } from "./models/userModel";
 import async from "async";
 import { allowedNodeEnvironmentFlags } from "process";
 import fs from "fs";
 import { Error } from "./models/errorModel";
 /* Controllers (route handlers) */
 import * as userController from "./controllers/userControllers";
-
+import * as userControllersByMongo from "./controllers/userControllersByMongo";
 /* Create Express server */
 const app = express();
 
@@ -37,6 +36,10 @@ app.post("/users", userController.adduser);
 app.get("/users", userController.getalluser);
 app.get("/users/:id", userController.getuser);
 app.delete("/users/:id", userController.deleteuser);
+
+app.post("/usersByMongo", userControllersByMongo.adduser);
+app.get("/usersByMongo", userControllersByMongo.getalluser);
+app.get("/usersByMongo/:name", userControllersByMongo.getuser);
 
 app.get('/index.html', function (req:string, res:any) {
   res.header('Content-Type', 'application/html');
