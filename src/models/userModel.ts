@@ -8,8 +8,11 @@
 */
 
 export type UserModel = {
-  id:number,
+  userid:number,
   name:string,
   password:string,
-  years:number
+  mobilephone:string,
+  postalcode:number,
+  areaname:string,
+  address:string
 };

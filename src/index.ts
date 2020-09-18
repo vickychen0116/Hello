@@ -34,8 +34,9 @@ app.use(function (err: Error, req:Request, res:Response, next:NextFunction) {
 /* Primary app routes */
 app.post("/users", userController.adduser);
 app.get("/users", userController.getalluser);
-app.get("/users/:id", userController.getuser);
-app.delete("/users/:id", userController.deleteuser);
+app.get("/users/:userid", userController.getuser);
+app.delete("/users/:userid", userController.deleteuser);
+app.put("/users/:id", userController.putuser);
 
 app.post("/usersByMongo", userControllersByMongo.adduser);
 app.get("/usersByMongo", userControllersByMongo.getalluser);

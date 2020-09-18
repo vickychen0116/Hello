@@ -27,12 +27,12 @@ export const adduser = (req:Request, res:Response, next:NextFunction)=> {
     connectionString: connectionString
   });
   client.connect();
-  client.query('INSERT INTO public.user(id,name,password)VALUES($1::int, $2::varchar, $3::varchar)', [req.body.id,req.body.name,req.body.password], function (err, result) {
+  client.query('INSERT INTO public.user(userid,name,password,mobilephone,postalcode,areaname,address)VALUES($1::int, $2::varchar, $3::varchar, $4::varchar, $5::int, $6::varchar, $7::varchar)', [req.body.userid,req.body.name,req.body.password,req.body.mobilephone,req.body.areano,req.body.areaname,req.body.address], function (err, result) {
     if (err) {
         console.log(err);
         res.status(400).send(err);
     }
-    console.log(result);
+    //console.log(result);
     res.status(200).send(result.rows);
     client.end();
   });
@@ -66,7 +66,7 @@ export const getalluser = (req:Request, res:Response, next:NextFunction)=> {
         console.log(err);
         res.status(400).send(err);
     }
-    console.log(result);
+    //console.log(result);
     res.status(200).send(result.rows);
     client.end();
   });
@@ -82,12 +82,12 @@ export const getuser = (req:Request, res:Response)=> {
     connectionString: connectionString
   });
   client.connect();
-  client.query('SELECT * FROM public.user WHERE id = $1', [req.params.id], function (err, result) {
+  client.query('SELECT * FROM public.user WHERE userid = $1', [req.params.userid], function (err, result) {
     if (err) {
         console.log(err);
         res.status(400).send(err);
     }
-    console.log(result);
+    //console.log(result);
     res.status(200).send(result.rows);
     client.end();
   });
@@ -99,12 +99,12 @@ export const deleteuser = (req:Request, res:Response, next:NextFunction)=> {
     connectionString: connectionString
   });
   client.connect();
-  client.query('DELETE FROM public.user WHERE id = $1', [req.params.id], function (err, result) {
+  client.query('DELETE FROM public.user WHERE userid = $1', [req.params.userid], function (err, result) {
     if (err) {
         console.log(err);
         res.status(400).send(err);
     }
-    console.log(result);
+    //console.log(result);
     res.status(200).send(result.rows);
     client.end();
   });
@@ -124,4 +124,22 @@ export const deleteuser = (req:Request, res:Response, next:NextFunction)=> {
       console.log(data);
       res.end(JSON.stringify(data));
   });*/
+};
+
+export const putuser = (req:Request, res:Response, next:NextFunction)=> {
+  console.log(req.body.name);
+  console.log(req.body.userid);
+  const client = new Client({
+    connectionString: connectionString
+  });
+  client.connect();
+  client.query('UPDATE public.user SET name=$1, password=$2, mobilephone=$3, postalcode=$4, areaname=$5, address=$6 WHERE userid=$7', [req.body.name, req.body.password, req.body.mobilephone, req.body.areano, req.body.areaname, req.body.address, req.body.userid], function (err, result) {
+    if (err) {
+        console.log(err);
+        res.status(400).send(err);
+    }
+    //console.log(result);
+    res.status(200).send(result.rows);
+    client.end();
+  });
 };
